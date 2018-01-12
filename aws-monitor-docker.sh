@@ -30,7 +30,7 @@ while true; do
                 sleep $STEP
         else
                 echo -e "$(date)\tdone"
-                log=`docker logs $containerid 2>&1 | tail -n 100`
+                log=`docker logs $containerid 2>&1 | tail -n 100 | sed 's/'\''/"/g'`
 
                 aws ses send-email \
                         --from $EMAILFROM \
